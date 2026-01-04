@@ -1,5 +1,5 @@
 pub fn sum(a: u8, b: u8) -> u8 {
-x+b
+a+b
 }
 
 pub fn diff(a: i16, b: i16) -> i16 {
