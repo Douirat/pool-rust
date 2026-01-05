@@ -1,14 +1,12 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+pub fn first_subword(mut s:  String) -> String {
+for (i, c) in s.chars().enumerate(){
+    if i == 0 {
+        continue
     }
+    if c == '_' || c.is_uppercase() {
+        s.truncate(i);
+        break
+    }
+}
+s
 }
