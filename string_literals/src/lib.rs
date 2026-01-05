@@ -18,5 +18,5 @@ let str2 = &v[index..v.len()];
 }
 
 pub fn find(v: &str, pat: char) -> usize {
-v.find(pat)
+some(v.find(pat))
 }
