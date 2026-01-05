@@ -5,11 +5,10 @@ pub fn initials(names: Vec<&str>) -> Vec<String> {
    for (i, c) in name.split_whitespace().enumerate(){
         if i == 0{
         sum += &c[0..1];
-        sum.push('.');
-        sum.push(' ')
+        sum += &". ";
         } else {
         sum += &c[0..1];
-        sum.push('.');
+        sum += &"."
         }
         
     }
