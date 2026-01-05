@@ -1,19 +1,19 @@
 pub struct Student(
-    pub id: u32,
-    pub first_name: &str,
-    pub last_name: &str,
+    u32,
+    &str,
+    &str,
 )
 
 
 
 pub fn id(student: &Student) -> u32 {
-    student.id
+    student.0
 }
 
 pub fn first_name(student: &Student) -> &str {
-student.first_name
+student.1
 }
 
 pub fn last_name(student: &Student) -> &str {
-    student.last_name
+    student.3
 }
