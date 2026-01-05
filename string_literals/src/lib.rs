@@ -4,7 +4,7 @@ v.len() == 0
 
 pub fn is_ascii(v: &str) -> bool {
 for i in v.chars() {
-    if i.is_ascii(){
+    if !i.is_ascii(){
         return false
     }
 }
