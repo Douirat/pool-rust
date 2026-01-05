@@ -1,5 +1,5 @@
 pub fn is_empty(v: &str) -> bool {
-v.len() == 0
+v.is_empty()
 }
 
 pub fn is_ascii(v: &str) -> bool {
@@ -7,19 +7,7 @@ v.is_ascii()
 }
 
 pub fn contains(v: &str, pat: &str) -> bool {
-if v == "" {
-    return true
-}
-if pat.len() > v.len() {
-    return false
-}
-for i in 0..(v.len()-pat.len()){
-println!("{}", &v[i..i+pat.len()]);
-    if &v[i..i+pat.len()] == pat{
-        return true
-    }
-}
-false
+v.contains(pat)
 }
 
 
@@ -30,12 +18,5 @@ let str2 = &v[index..v.len()];
 }
 
 pub fn find(v: &str, pat: char) -> usize {
-let mut x: usize = 0;
-for i in v.chars(){
-    if i == pat {
-        break
-    } 
-    x += 1;
-}
-x
+v.find(at)
 }
