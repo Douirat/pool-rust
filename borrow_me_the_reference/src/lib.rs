@@ -22,31 +22,42 @@ for c in pud{
 }
 
 pub fn do_operations(v: &mut [String]) {
-for c in v {
-    let mut o1: isize = 0;
-    let mut o2: isize  = 0;
-    let mut happened: bool = false;
-    let mut operator = String::new();
-    for i in c.chars(){
-    if i == '-' || i == '+' || i == '*' {
-        operator.push(i);
-        happened = true;
-        continue
+    let mut result: Vec<String> = Vec::new();
+
+    // READ the strings
+    for c in v.iter() {
+        let mut o1: isize = 0;
+        let mut o2: isize = 0;
+        let mut happened = false;
+        let mut operator = ' ';
+
+        for i in c.chars() {
+            if i == '-' || i == '+' {
+                operator = i;
+                happened = true;
+                continue;
+            }
+
+            let digit = (i as u32 - '0' as u32) as isize;
+
+            if !happened {
+                o1 = o1 * 10 + digit;
+            } else {
+                o2 = o2 * 10 + digit;
+            }
+        }
+
+        let value = match operator {
+            '+' => o1 + o2,
+            '-' => o1 - o2,
+            _ => 0,
+        };
+
+        result.push(value.to_string());
     }
-    if !happened{
-            o1 = (o1 * 10) + (((i as u32 ) as isize) - 48);
-        
-    } else {
-        o2  = (o2 * 10) + (((i as u32 ) as isize) - 48);
-      
+
+    // WRITE back into caller's array
+    for (i, s) in v.iter_mut().enumerate() {
+        *s = result[i].clone();
     }
-    
-    }
-    if operator == "+" {
-        println!("{}", (o1 + o2));
-    }
-    if operator == "-" {
-          println!("{}", (o1 - o2));
-    }
-}
 }
