@@ -3,7 +3,7 @@ pub struct Light{
     pub alias: String,
     pub brightness: u8,
 }
-pub impl Light {
+impl Light {
 	pub fn new(alias: &str) -> Self {
     Light{
     alias: String::from(alias),
