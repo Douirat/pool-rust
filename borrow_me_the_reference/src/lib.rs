@@ -58,6 +58,6 @@ pub fn do_operations(v: &mut [String]) {
 
     // WRITE back into caller's array
     for (i, s) in v.into_iter().enumerate() {
-        s = result[i].clone();
+        *s = result[i].clone();
     }
 }
