@@ -1,4 +1,4 @@
-#[dervie(Debug, PartialEq, Eq, Clone)]
+#[derive(Debug, PartialEq, Eq, Clone)]
 struct Light{
     pub alias: String,
     pub brightness: u8,
