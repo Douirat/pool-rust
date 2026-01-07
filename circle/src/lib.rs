@@ -22,8 +22,8 @@ pub fn new(x: f64, y:f64, radius: f64)-> Circle {
     }
 
     pub fn intersect(&self, other: &Circle) -> bool {
-        let dx = self.x - other.x;
-        let dy = self.y - other.y;
+        let dx = self.center.0 - other.center.0;
+        let dy = self.center.1 - other.center.1;
         let distance = (dx*dx + dy*dy).sqrt();
         distance <= self.radius + other.radius && distance >= (self.radius - other.radius).abs()
     }
