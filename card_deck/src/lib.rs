@@ -1,5 +1,6 @@
 use rand::prelude::*;
 
+// ---------------- Suit Enum ----------------
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Suit {
     Heart,
@@ -9,7 +10,7 @@ pub enum Suit {
 }
 
 impl Suit {
-
+    // Translate u8 -> Suit
     pub fn translate(value: u8) -> Suit {
         match value {
             1 => Suit::Heart,
@@ -20,7 +21,7 @@ impl Suit {
         }
     }
 
-
+    // Generate random Suit
     pub fn random() -> Suit {
         let mut rng = thread_rng();
         let x = rng.gen_range(1..=4);
@@ -28,8 +29,8 @@ impl Suit {
     }
 }
 
-
-#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+// ---------------- Rank Enum ----------------
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Rank {
     Ace,
     Number(u8), // 2..10
@@ -39,7 +40,7 @@ pub enum Rank {
 }
 
 impl Rank {
-
+    // Translate u8 -> Rank
     pub fn translate(value: u8) -> Rank {
         match value {
             1 => Rank::Ace,
@@ -51,7 +52,7 @@ impl Rank {
         }
     }
 
-
+    // Generate random Rank
     pub fn random() -> Rank {
         let mut rng = thread_rng();
         let x = rng.gen_range(1..=13);
@@ -59,15 +60,14 @@ impl Rank {
     }
 }
 
-
+// ---------------- Card Struct ----------------
 #[derive(Debug)]
 pub struct Card {
     pub suit: Suit,
     pub rank: Rank,
 }
 
-
+// ---------------- winner_card Function ----------------
 pub fn winner_card(card: &Card) -> bool {
     card.rank == Rank::Ace && card.suit == Suit::Spade
 }
-
