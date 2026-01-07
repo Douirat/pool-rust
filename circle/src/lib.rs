@@ -12,8 +12,8 @@ pub fn new(x: f64, y:f64, radius: f64)-> Circle {
     }
 }
  
- fn area(&self) -> f64{
-     let pi =  std::f64::consts::PI;
+ pub fn area(&self) -> f64{
+     let pi =  3.141592653589793;
      pi*(self.radius * self.radius)
  }   
     
