@@ -1,7 +1,3 @@
-use rand::Rng;        
-use rand::thread_rng; 
-
-
 // ---------------- Suit Enum ----------------
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Suit {
@@ -12,7 +8,6 @@ pub enum Suit {
 }
 
 impl Suit {
-    // Translate u8 -> Suit
     pub fn translate(value: u8) -> Suit {
         match value {
             1 => Suit::Heart,
@@ -23,10 +18,9 @@ impl Suit {
         }
     }
 
-    // Generate random Suit
-    pub fn random() -> Suit {
-        let mut rng = thread_rng();
-        let x = rng.gen_range(1..=4);
+    pub fn random(seed: &mut u32) -> Suit {
+        *seed = seed.wrapping_mul(1103515245).wrapping_add(12345); // simple LCG
+        let x = ((*seed / 65536) % 4 + 1) as u8; // 1..4
         Suit::translate(x)
     }
 }
@@ -35,14 +29,13 @@ impl Suit {
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Rank {
     Ace,
-    Number(u8), // 2..10
+    Number(u8),
     Jack,
     Queen,
     King,
 }
 
 impl Rank {
-    // Translate u8 -> Rank
     pub fn translate(value: u8) -> Rank {
         match value {
             1 => Rank::Ace,
@@ -54,10 +47,9 @@ impl Rank {
         }
     }
 
-    // Generate random Rank
-    pub fn random() -> Rank {
-        let mut rng = thread_rng();
-        let x = rng.gen_range(1..=13);
+    pub fn random(seed: &mut u32) -> Rank {
+        *seed = seed.wrapping_mul(1103515245).wrapping_add(12345); // simple LCG
+        let x = ((*seed / 65536) % 13 + 1) as u8; // 1..13
         Rank::translate(x)
     }
 }
