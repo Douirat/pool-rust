@@ -1,10 +1,18 @@
 pub fn capitalize_first(input: &str) -> String {
-    let mut chars = input.chars();
-    match chars.next() {
-        Some(first) => first.to_uppercase().collect::<String>() + chars.as_str(),
-        None => String::new(),
+ let mut result = String::new();
+ let mut start = true;
+ for c in input.chars(){
+    if start{
+        let r = c.to_uppercase().to_string();
+        result += &r;
+        start = false;
+        continue
     }
+result.push(c);
+ }
+result
 }
+
 
 pub fn title_case(input: &str) -> String {
     let mut result = String::with_capacity(input.len());
