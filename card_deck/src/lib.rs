@@ -1,4 +1,6 @@
-use rand::prelude::*;
+use rand::Rng;        
+use rand::thread_rng; 
+
 
 // ---------------- Suit Enum ----------------
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
