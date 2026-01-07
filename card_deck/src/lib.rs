@@ -17,7 +17,7 @@ impl Suit {
             2 => Suit::Diamond,
             3 => Suit::Spade,
             4 => Suit::Club,
-            _ => panic!("Invalid value for Suit!"),#
+            _ => panic!("Invalid value for Suit!"),
         }
     }
 
