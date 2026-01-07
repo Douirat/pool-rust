@@ -1,6 +1,6 @@
 pub fn char_length(s: &str) -> usize {
     let mut count: usize = 0;
-    for _i in s {
+    for _i in s.chars() {
         count +=1;
     }
     count
