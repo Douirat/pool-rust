@@ -23,8 +23,8 @@ impl Suit {
 
     // Generate random Suit
     pub fn random() -> Suit {
-        let mut rng = rand::thread_rng();
-        let x = rng.gen_range(1..=4);
+        let mut rng = rand::rng();
+        let x = rng.random_range(1..=4);
         Suit::translate(x)
     }
 }
@@ -54,8 +54,8 @@ impl Rank {
 
     // Generate random Rank
     pub fn random() -> Rank {
-        let mut rng = rand::thread_rng();
-        let x = rng.gen_range(1..=13);
+        let mut rng = rand::rng();
+        let x = rng.random_range(1..=13);
         Rank::translate(x)
     }
 }
