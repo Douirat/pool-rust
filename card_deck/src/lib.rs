@@ -1,3 +1,5 @@
+use rand::prelude::*;
+
 #[derive(Debug)]
 pub enum Suit {
     Heart,
