@@ -20,9 +20,12 @@ pub fn new(x: f64, y:f64, radius: f64)-> Circle {
     pub fn diameter(&self) -> f64{
         2.0*self.radius
     }
-    pub fn intersect(&self, other: Circle) ->bool{
-        let d = self.center.distance(other.center);
-        self.radius - other.radius < d && d < self.radius - other.radius  
+
+    pub fn intersect(&self, other: &Circle) -> bool {
+        let dx = self.x - other.x;
+        let dy = self.y - other.y;
+        let distance = (dx*dx + dy*dy).sqrt();
+        distance <= self.radius + other.radius && distance >= (self.radius - other.radius).abs()
     }
 }
 
