@@ -12,6 +12,7 @@ for i in list.iter(){
     arr.push(*i);
 }
 bubble_sort(&mut arr);
+println!("{:?}", arr);
 if arr.len() % 2 == 0{
    (arr[arr.len() / 2 as usize] +  arr[(arr.len() / 2 as usize) + 1] ) / 2
 } else{
