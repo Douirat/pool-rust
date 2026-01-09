@@ -1,4 +1,3 @@
-
 use std::collections::HashMap;
 
 pub fn mean(list: &[i32]) -> f64 {
@@ -13,10 +12,11 @@ for i in list.iter(){
 }
 bubble_sort(&mut arr);
 println!("{:?}", arr);
+let mid: usize = arr.len() / 2;
 if arr.len() % 2 == 0{
-   (arr[arr.len() / 2 as usize] +  arr[(arr.len() / 2 as usize) + 1] ) / 2
+   (arr[mid-1] +  arr[mid+ 1] ) / 2
 } else{
-     arr[arr.len() / 2 as usize]
+     arr[mid]
 }
 }
 
