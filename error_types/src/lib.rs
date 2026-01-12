@@ -9,6 +9,7 @@ pub struct FormError {
 }
 
 impl FormError {
+    // Constructor to create a FormError easily
     pub fn new(field_name: &'static str, field_value: String, err: &'static str) -> Self {
         let mut values = HashMap::new();
         values.insert(field_name, field_value);
@@ -31,7 +32,11 @@ impl Form {
     pub fn validate(&self) -> Result<(), FormError> {
         // Validate name
         if self.name.is_empty() {
-            return Err(FormError::new("first_name", self.name.clone(), "Username is empty"));
+            return Err(FormError::new(
+                "first_name",
+                self.name.clone(),
+                "Username is empty",
+            ));
         }
 
         // Validate password length
@@ -43,6 +48,7 @@ impl Form {
             ));
         }
 
+        // Validate password content (letters, numbers, symbols)
         let has_letter = self.password.chars().any(|c| c.is_ascii_alphabetic());
         let has_number = self.password.chars().any(|c| c.is_ascii_digit());
         let has_symbol = self.password.chars().any(|c| !c.is_ascii_alphanumeric());
