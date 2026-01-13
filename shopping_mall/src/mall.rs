@@ -2,7 +2,9 @@ use std::collections::HashMap;
 
 #[inline]
 fn coerce_map<V>(m: HashMap<impl Into<String>, V>) -> HashMap<String, V> {
-    m.into_iter().map(|(k, v)| (k.into(), v)).collect()
+    m.into_iter()
+        .map(|(k, v)| (k.into(), v))
+        .collect()
 }
 
 #[derive(Debug, Clone, PartialEq)]
@@ -16,7 +18,7 @@ impl Mall {
     pub fn new(
         name: impl Into<String>,
         guards: HashMap<impl Into<String>, Guard>,
-        floors: HashMap<impl Into<String>, Floor>,
+        floors: HashMap<impl Into<String>, Floor>
     ) -> Self {
         Self {
             name: name.into(),
@@ -59,12 +61,18 @@ impl Floor {
     }
 
     pub fn replace_store(&mut self, store: impl Into<String>, with: Store) {
-        self.stores.entry(store.into()).and_modify(|v| *v = with);
+        self.stores.entry(store.into()).and_modify(|v| {
+            *v = with;
+        });
     }
 
     pub fn add_store(&mut self, name: impl Into<String>, store: Store) -> Result<(), ()> {
-        let has_space = self.size_limit
-            >= self.stores.values().map(|s| s.square_meters).sum::<u64>() + store.square_meters;
+        let has_space =
+            self.size_limit >=
+            self.stores
+                .values()
+                .map(|s| s.square_meters)
+                .sum::<u64>() + store.square_meters;
 
         if has_space {
             self.stores.insert(name.into(), store);
