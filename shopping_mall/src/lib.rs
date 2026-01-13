@@ -1,12 +1,10 @@
-mod mall;
 use std::collections::HashMap;
-pub use mall::*;
 
-fn all_stores(mall: &Mall) -> impl Iterator<Item = (&String, &Store)> {
+pub fn all_stores(mall: &Mall) -> impl Iterator<Item = (&String, &Store)> {
     mall.floors.values().flat_map(|f| f.stores.iter())
 }
 
-fn all_employees( mall: &Mall) -> impl Iterator<Item = (&String, &Employee)> {
+pub fn all_employees( mall: &Mall) -> impl Iterator<Item = (&String, &Employee)> {
     all_stores(mall).flat_map(|(_, s)| s.employees.iter())
 }
 
