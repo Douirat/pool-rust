@@ -1,3 +1,5 @@
 pub fn stars(n: u32) -> String {
-"*".to_string().repeat((n as usize) * 2)
+    let mut x:usize = 2;
+    x.pow(n);
+"*".to_string().repeat(x)
 }
