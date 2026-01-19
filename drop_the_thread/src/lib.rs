@@ -25,7 +25,7 @@ impl ThreadPool {
     }
 
     pub fn is_dropped(&self, id: usize) -> bool {
-        *self.states.borrow().get(id).copied().unwrap_or(&false)
+        self.states.borrow().get(id).copied().unwrap_or(false)
     }
 
     pub fn drop_thread(&self, id: usize) {
