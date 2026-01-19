@@ -14,7 +14,7 @@ impl ThreadPool {
     }
 }
 
-    pub fn new_thread(&self, c: String) -> (usize, Thread) {
+    pub fn new_thread(&self, c: String) -> (usize, Thread<'_>) {
        let id = self.thread_len();
        self.states.borrow_mut().push(false);
        (id, Thread::new(id, c, self))
@@ -32,7 +32,7 @@ impl ThreadPool {
         let mut states = self.states.borrow_mut();
         let t = states.get_mut(id).expect("invalid thred id");
         if *t{
-            panic!("X is already dropped");
+            panic!("{id} is already dropped");
         }
         *t = true;
         self.drops.set(self.drops.get() + 1);
@@ -52,13 +52,13 @@ impl<'a> Thread<'a> {
         Self{pid: p, cmd: c, parent: t}
     }
 
-    pub fn skill(mut self) {
-       drop(&mut self)
+    pub fn skill(self) {
+       drop(self)
     }
 }
 
 impl Drop for Thread<'_> {
-    fn drop(&mut self){
+    fn drop(self){
         self.parent.drop_thread(self.pid)
     }
 }
