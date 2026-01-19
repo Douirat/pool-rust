@@ -14,7 +14,7 @@ impl ThreadPool {
     }
 }
 
-    pub fn new_thread(&self, c: String) -> (usize, Thread<'_>) {
+    pub fn new_thread(&self, c: String) -> (usize, Thread) {
        let id = self.thread_len();
        self.states.borrow_mut().push(false);
        (id, Thread::new(id, c, self))
