@@ -58,7 +58,7 @@ impl<'a> Thread<'a> {
 }
 
 impl Drop for Thread<'_> {
-    fn drop(self){
+    fn drop(&mut self){
         self.parent.drop_thread(self.pid)
     }
 }
