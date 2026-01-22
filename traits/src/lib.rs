@@ -2,11 +2,11 @@ use std::fmt;
 
 #[derive(Debug)]
 pub struct Player {
-    pub name: String,
+    pub name: &str,
     pub strength: f64,
     pub score: i32,
     pub money: i32,
-    pub weapons: Vec<String>,
+    pub weapons: Vec<&str>,
 }
 
 pub struct Fruit {
