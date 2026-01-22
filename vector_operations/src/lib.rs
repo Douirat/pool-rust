@@ -1,3 +1,5 @@
+use std::ops::{Add, Sub};
+
 #[derive(Debug, Copy, Clone, PartialEq)]
 pub struct ThreeDVector<T> {
     pub i: T,
@@ -5,7 +7,6 @@ pub struct ThreeDVector<T> {
     pub k: T,
 }
 
-use std::ops::{Add, Sub};
 
 impl<T> Add for ThreeDVector<T>
 where
