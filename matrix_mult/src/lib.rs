@@ -1,0 +1,33 @@
+use std::ops::Mul;
+
+impl<T> Mul for Matrix<T>
+where
+    T: Copy + Default + std::ops::Add<Output = T> + std::ops::Mul<Output = T>,
+{
+    type Output = Option<Matrix<T>>;
+
+    fn mul(self, rhs: Self) -> Self::Output {
+        // dimension check
+        if self.number_of_cols() != rhs.number_of_rows() {
+            return None;
+        }
+
+        let rows = self.number_of_rows();
+        let cols = rhs.number_of_cols();
+        let mid = self.number_of_cols();
+
+        let mut result = vec![vec![T::default(); cols]; rows];
+
+        for i in 0..rows {
+            for j in 0..cols {
+                let mut sum = T::default();
+                for k in 0..mid {
+                    sum = sum + self.0[i][k] * rhs.0[k][j];
+                }
+                result[i][j] = sum;
+            }
+        }
+
+        Some(Matrix(result))
+    }
+}
