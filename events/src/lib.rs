@@ -26,10 +26,10 @@ pub enum Event<'a> {
 
 impl fmt::Display for Notification {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        // Apply color using RGB values from self.color
-        let colored_content = self
-            .content
-            .truecolor(self.color.0, self.color.1, self.color.2);
+        let (r, g, b) = self.color;
+
+        let colored_content = self.content.truecolor(r, g, b);
+
         write!(
             f,
             "({:?}, {}, {})",
@@ -47,11 +47,14 @@ impl Event<'_> {
                 position: Position::Bottom,
                 content: msg.to_string(),
             },
+
             Event::Registration(duration) => {
-                let secs = duration.as_secs();
-                let hours = secs / 3600;
-                let minutes = (secs % 3600) / 60;
-                let seconds = secs % 60;
+                let total_secs = duration.as_secs();
+
+                let hours = total_secs / 3600;
+                let minutes = (total_secs % 3600) / 60;
+                let seconds = total_secs % 60;
+
                 Notification {
                     size: 30,
                     color: (255, 2, 22),
@@ -62,12 +65,14 @@ impl Event<'_> {
                     ),
                 }
             }
+
             Event::Appointment(msg) => Notification {
                 size: 100,
                 color: (200, 200, 3),
                 position: Position::Center,
                 content: msg.to_string(),
             },
+
             Event::Holiday => Notification {
                 size: 25,
                 color: (0, 255, 0),
