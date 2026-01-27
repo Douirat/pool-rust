@@ -3,32 +3,33 @@ use std::ops::Mul;
 #[derive(Debug, Clone, PartialEq)]
 pub struct Matrix<T>(pub Vec<Vec<T>>);
 
-pub fn number_of_rows(&self) -> usize {
-    self.0.len()
-}
+impl<T> Matrix<T> {
+    pub fn number_of_rows(&self) -> usize {
+        self.0.len()
+    }
 
-pub fn number_of_cols(&self) -> usize {
-    if self.0.is_empty() {
-        0
-    } else {
-        self.0[0].len()
+    pub fn number_of_cols(&self) -> usize {
+        if self.0.is_empty() {
+            0
+        } else {
+            self.0[0].len()
+        }
+    }
+
+    pub fn row(&self, n: usize) -> Vec<T>
+    where
+        T: Clone,
+    {
+        self.0[n].clone()
+    }
+
+    pub fn col(&self, n: usize) -> Vec<T>
+    where
+        T: Clone,
+    {
+        self.0.iter().map(|row| row[n].clone()).collect()
     }
 }
-
-pub fn row(&self, n: usize) -> Vec<T>
-where
-    T: Clone,
-{
-    self.0[n].clone()
-}
-
-pub fn col(&self, n: usize) -> Vec<T>
-where
-    T: Clone,
-{
-    self.0.iter().map(|row| row[n].clone()).collect()
-}
-
 
 impl<T> Mul for Matrix<T>
 where
@@ -37,7 +38,6 @@ where
     type Output = Option<Matrix<T>>;
 
     fn mul(self, rhs: Self) -> Self::Output {
-        // dimension check
         if self.number_of_cols() != rhs.number_of_rows() {
             return None;
         }
