@@ -1,4 +1,4 @@
-matrix_opsuse std::ops::{Add, AddAssign, Sub, Mul};
+use std::ops::{Add, AddAssign, Sub, Mul};
 
 #[derive(Debug, Eq, PartialEq, Clone, Copy)]
 pub struct Matrix<const W: usize, const H: usize, T>( [[T; W]; H]);
