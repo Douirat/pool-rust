@@ -4,7 +4,7 @@ pub struct Person<'a> {
     pub age: u32,
 }
 
-impl Person {
+impl<'a> Person<'a> {
     pub fn new<'a>(name: &'a str) -> Self {
         Self{
             name,
