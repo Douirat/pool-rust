@@ -1,11 +1,12 @@
 #[derive(Copy, Clone)]
 pub struct Collatz {
     pub v: u64,
+    finished: bool,
 }
 
 impl Collatz {
     pub fn new(n: u64) -> Self {
-        Self { v: n }
+        Self { v: n, finished: n == 0 } // handle 0 edge case
     }
 }
 
@@ -13,13 +14,15 @@ impl Iterator for Collatz {
     type Item = u64;
 
     fn next(&mut self) -> Option<Self::Item> {
-        if self.v == 0 || self.v == 1 {
+        if self.finished {
             return None;
         }
 
         let current = self.v;
 
-        if self.v % 2 == 0 {
+        if self.v == 1 {
+            self.finished = true; // next call will stop iteration
+        } else if self.v % 2 == 0 {
             self.v /= 2;
         } else {
             self.v = 3 * self.v + 1;
@@ -27,11 +30,4 @@ impl Iterator for Collatz {
 
         Some(current)
     }
-}
-
-pub fn collatz(n: u64) -> usize {
-    if n == 0 || n == 1 {
-        return 0;
-    }
-    Collatz::new(n).count()
 }
