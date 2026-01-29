@@ -31,37 +31,31 @@ impl Cart {
 
 pub fn generate_receipt(&mut self) -> Vec<f32> {
     let prices: Vec<f32> = self.items.iter().map(|p| p.1).collect();
-    let mut result = Vec::new();
 
-    prices.chunks(3).for_each(|chunk| {
-        if chunk.len() == 3 {
-            let sum: f32 = chunk.iter().sum();
-            let min = chunk
-                .iter()
-                .cloned()
-                .min_by(|a, b| a.partial_cmp(b).unwrap())
-                .unwrap();
+    if prices.len() < 3 {
+        self.receipt = prices.clone();
+        return prices;
+    }
 
-            let factor = (sum - min) / sum;
+    let sum: f32 = prices.iter().sum();
+    let min = prices
+        .iter()
+        .cloned()
+        .min_by(|a, b| a.partial_cmp(b).unwrap())
+        .unwrap();
 
-            chunk.iter().for_each(|p| {
-                let v = (p * factor * 100.0).round() / 100.0;
-                result.push(v);
-            });
-        } else {
-            // leftover items, no promotion
-            chunk.iter().for_each(|p| {
-                let v = (*p * 100.0).round() / 100.0;
-                result.push(v);
-            });
-        }
-    });
+    let factor = (sum - min) / sum;
 
-    // ONLY sort at the end
+    let mut result: Vec<f32> = prices
+        .iter()
+        .map(|p| ((p * factor) * 100.0).round() / 100.0)
+        .collect();
+
     result.sort_by(|a, b| a.partial_cmp(b).unwrap());
 
     self.receipt = result.clone();
     result
 }
+
 
 }
