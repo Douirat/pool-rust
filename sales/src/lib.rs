@@ -24,41 +24,40 @@ impl Cart {
     }
 
     pub fn insert_item(&mut self, s: &Store, ele: String) {
-        if let Some((name, price)) = s.products.iter().find(|p| p.0 == ele) {
-            self.items.push((name.clone(), *price));
+        // Chercher le produit dans le store
+        for (name, price) in &s.products {
+            if name == &ele {
+                self.items.push((ele.clone(), *price));
+                break;
+            }
         }
     }
 
-pub fn generate_receipt(&mut self) -> Vec<f32> {
-    let mut result = Vec::new();
+    pub fn generate_receipt(&mut self) -> Vec<f32> {
+        let mut prices: Vec<f32> = self.items.iter().map(|(_, price)| *price).collect();
+        prices.sort_by(|a, b| a.partial_cmp(b).unwrap());
 
-    self.items.chunks(3).for_each(|chunk| {
-        if chunk.len() == 3 {
-            // convert to f64 for precise calculation
-            let prices: Vec<f64> = chunk.iter().map(|p| p.1 as f64).collect();
-            let sum: f64 = prices.iter().sum();
-            let min: f64 = *prices.iter().min_by(|a, b| a.partial_cmp(b).unwrap()).unwrap();
+        let free_items = prices.len() / 3;
 
-            let factor = (sum - min) / sum;
+        let total_discount: f32 = prices.iter().take(free_items).sum();
 
-            prices.iter().for_each(|p| {
-                let v = ((p * factor * 100.0).round() / 100.0) as f32;
-                result.push(v);
-            });
+        let total_price: f32 = prices.iter().sum();
+
+        let final_price = total_price - total_discount;
+
+        let ratio = if total_price > 0.0 {
+            final_price / total_price
         } else {
-            chunk.iter().for_each(|p| {
-                let v = ((*p as f64 * 100.0).round() / 100.0) as f32;
-                result.push(v);
-            });
-        }
-    });
+            1.0
+        };
 
-    result.sort_by(|a, b| a.partial_cmp(b).unwrap());
-    self.receipt = result.clone();
-    result
-}
+        let receipt: Vec<f32> = prices
+            .iter()
+            .map(|price| (price * ratio * 100.0).round() / 100.0)
+            .collect();
 
+        self.receipt = receipt.clone();
 
-
-
+        receipt
+    }
 }
