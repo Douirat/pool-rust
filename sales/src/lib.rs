@@ -32,37 +32,32 @@ impl Cart {
 pub fn generate_receipt(&mut self) -> Vec<f32> {
     let mut result = Vec::new();
 
-    // process in insertion order in groups of 3
-    self.items
-        .chunks(3)
-        .for_each(|chunk| {
-            if chunk.len() == 3 {
-                // sum and min for this group
-                let sum: f32 = chunk.iter().map(|p| p.1).sum();
-                let min = chunk.iter().map(|p| p.1).fold(f32::MAX, f32::min);
+    self.items.chunks(3).for_each(|chunk| {
+        if chunk.len() == 3 {
+            // convert to f64 for precise calculation
+            let prices: Vec<f64> = chunk.iter().map(|p| p.1 as f64).collect();
+            let sum: f64 = prices.iter().sum();
+            let min: f64 = *prices.iter().min_by(|a, b| a.partial_cmp(b).unwrap()).unwrap();
 
-                let factor = (sum - min) / sum;
+            let factor = (sum - min) / sum;
 
-                // apply discount proportionally
-                chunk.iter().for_each(|p| {
-                    let v = (p.1 * factor * 100.0).round() / 100.0;
-                    result.push(v);
-                });
-            } else {
-                // leftover items, no discount
-                chunk.iter().for_each(|p| {
-                    let v = (p.1 * 100.0).round() / 100.0;
-                    result.push(v);
-                });
-            }
-        });
+            prices.iter().for_each(|p| {
+                let v = ((p * factor * 100.0).round() / 100.0) as f32;
+                result.push(v);
+            });
+        } else {
+            chunk.iter().for_each(|p| {
+                let v = ((*p as f64 * 100.0).round() / 100.0) as f32;
+                result.push(v);
+            });
+        }
+    });
 
-    // sort final receipt
     result.sort_by(|a, b| a.partial_cmp(b).unwrap());
-
     self.receipt = result.clone();
     result
 }
+
 
 
 
