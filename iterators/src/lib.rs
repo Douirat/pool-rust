@@ -31,3 +31,11 @@ impl Iterator for Collatz {
         Some(current)
     }
 }
+
+// Make the collatz function public
+pub fn collatz(n: u64) -> usize {
+    if n == 0 {
+        return 0;
+    }
+    Collatz::new(n).count() - 1
+}
