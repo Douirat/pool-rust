@@ -6,7 +6,7 @@ pub struct Collatz {
 
 impl Collatz {
     pub fn new(n: u64) -> Self {
-        Self { v: n, finished: n == 0 } // handle 0 edge case
+        Self { v: n, finished: n == 0 }
     }
 }
 
@@ -21,7 +21,7 @@ impl Iterator for Collatz {
         let current = self.v;
 
         if self.v == 1 {
-            self.finished = true; // next call will stop iteration
+            self.finished = true;
         } else if self.v % 2 == 0 {
             self.v /= 2;
         } else {
