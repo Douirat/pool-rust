@@ -1,4 +1,4 @@
-sales#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq)]
 pub struct Store {
     pub products: Vec<(String, f32)>,
 }
