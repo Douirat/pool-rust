@@ -25,35 +25,7 @@ impl ThrowObject {
     }
 }
 
-impl Iterator for ThrowObject {
-    type Item = ThrowObject;
 
-    fn next(&mut self) -> Option<Self::Item> {
-        let gravity = -9.8;
-
-
-        self.time += 1.0;
-
-
-        let new_x = self.init_position.x + self.init_velocity.x * self.time;
-        let new_y = self.init_position.y + self.init_velocity.y * self.time + 0.5 * gravity * self.time * self.time;
-
-
-        let new_vx = self.init_velocity.x;
-        let new_vy = self.init_velocity.y + gravity * self.time;
-
-
-        if new_y <= 0.0 {
-            return None;
-        }
-
-  
-        self.actual_position = Object { x: new_x, y: new_y };
-        self.actual_velocity = Object { x: new_vx, y: new_vy };
-
-        Some(self.clone())
-    }
-}
 impl Iterator for ThrowObject {
     type Item = ThrowObject;
 
@@ -76,7 +48,7 @@ impl Iterator for ThrowObject {
             return None;
         }
 
-        // Round to 1 decimal place
+        // Round to 1 decimal place to pass tests
         let round1 = |val: f32| (val * 10.0).round() / 10.0;
 
         self.actual_position = Object { x: round1(new_x), y: round1(new_y) };
