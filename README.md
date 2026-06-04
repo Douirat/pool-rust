@@ -1,21 +1,21 @@
-# Zone01 Oujda — The Pool
+# Zone01 Oujda — Rust Pool
 
-> A one-month intensive coding bootcamp that serves as the entry point to Zone01 Oujda's software engineering program.
+> A one-month intensive coding bootcamp focused on Rust, serving as the entry point to Zone01 Oujda's software engineering program.
 
 ---
 
 ## What Is the Pool?
 
-The **Pool** is Zone01 Oujda's selection and onboarding phase — a full month of daily coding challenges designed to test problem-solving ability, consistency, and the capacity to learn under pressure. It is the gateway to the full curriculum.
+The **Pool** is Zone01 Oujda's selection and onboarding phase — a full month of daily coding challenges in **Rust**, designed to test problem-solving ability, consistency, and the capacity to learn a systems programming language under pressure. It is the gateway to the full curriculum.
 
-There are no lectures. No teachers standing at a board. You learn by doing, by failing, by reading documentation, and by asking the right questions to the right people.
+There are no lectures. No teachers at a board. You learn by doing, by failing, by reading documentation, and by asking the right questions to the right people.
 
 ---
 
 ## Structure
 
 - **Duration:** ~1 month
-- **Language:** Go (primary), Shell scripting
+- **Language:** Rust (primary), Shell scripting
 - **Format:** Daily exercises submitted via a Git-based platform
 - **Evaluation:** Peer audits — students review and grade each other's work
 - **Environment:** Linux terminal, no hand-holding
@@ -26,28 +26,40 @@ There are no lectures. No teachers standing at a board. You learn by doing, by f
 
 Over the course of the month, I completed exercises across the following areas:
 
-### Go Fundamentals
-- Variables, types, control flow, loops
-- Functions, recursion, multiple return values
-- Pointers and memory basics
-- Error handling with `error` and `panic`
+### Rust Fundamentals
+- Variables, mutability, shadowing
+- Data types: scalars, tuples, arrays
+- Control flow: `if`, `loop`, `while`, `for`
+- Functions and expressions
 
-### Data Structures & Algorithms
-- Arrays, slices, maps
-- Linked lists, stacks, queues
-- Sorting and searching algorithms
+### Ownership & Memory Model
+- Ownership rules and move semantics
+- Borrowing and references (`&`, `&mut`)
+- Lifetimes basics
+- Stack vs heap understanding
+
+### Data Structures
+- Structs and methods
+- Enums and pattern matching (`match`, `if let`)
+- `Option<T>` and `Result<T, E>`
+- Vectors, HashMaps, Strings vs `&str`
+
+### Error Handling
+- Propagating errors with `?`
+- Custom error types
+- Panics vs recoverable errors
+
+### Algorithms & Logic
+- Sorting and searching
 - String manipulation
-
-### System & Unix Basics
-- File I/O in Go
-- Working with the terminal and standard streams
-- Basic shell scripting
+- Recursion and iteration
+- Closures and iterators (`map`, `filter`, `fold`)
 
 ### Software Practices
-- Writing clean, readable code
-- Structuring Go packages
-- Unit testing
-- Git workflow (commit, push, branch)
+- Writing idiomatic Rust
+- Structuring with modules and crates
+- Unit testing with `#[test]`
+- Git workflow
 
 ---
 
@@ -57,7 +69,7 @@ Every project is reviewed by **peer auditors** — other students going through 
 
 - You must be able to **explain and defend** your code
 - You must be able to **read and critique** someone else's
-- There is no partial credit for code that doesn't run
+- There is no partial credit for code that doesn't compile
 
 ---
 
@@ -65,19 +77,19 @@ Every project is reviewed by **peer auditors** — other students going through 
 
 | Skill | What I Developed |
 |-------|-----------------|
-| Go programming | Solid fundamentals from day one |
-| Problem solving | Breaking down specs into working code daily |
-| Autonomy | Learning from docs, not from instructions |
-| Peer collaboration | Code review culture from the start |
-| Resilience | Pushing through failure and iterating fast |
+| Rust programming | Ownership, borrowing, and the borrow checker from day one |
+| Systems thinking | Memory management without garbage collection |
+| Problem solving | Translating specs into working, safe code daily |
+| Autonomy | Learning from `rustdoc` and `rustc` errors, not from instructions |
+| Resilience | Fighting the borrow checker and coming out the other side |
 
 ---
 
 ## The Experience
 
-The Pool is intentionally difficult. The workload is high, the feedback is immediate, and the only way forward is to keep submitting. It filters for people who can stay consistent under pressure and who take ownership of their own learning.
+The Pool is intentionally difficult. Rust's learning curve is steep — the borrow checker is unforgiving, error messages are verbose, and nothing compiles until it's correct. The workload is high, the feedback is immediate, and the only way forward is to keep submitting.
 
-Completing it means being ready for the full Zone01 curriculum — a project-based, self-directed software engineering program where the same principles apply at a larger scale.
+Completing it means internalizing Rust's core principles — safety, ownership, and zero-cost abstractions — and being ready for the full Zone01 curriculum where those concepts are applied in real systems-level projects.
 
 ---
 
